@@ -1,17 +1,34 @@
 package br.com.senac.projeto_integrador_ii.persistencia;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Usuario {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String login;
     private String senha;
-    private String tipo;
+    private String tipo; 
 
-    public int getId() {
-        return id;
+    // Construtor vazio para JPA
+    public Usuario() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    // Construtor útil
+    public Usuario(String login, String senha, String tipo) {
+        this.login = login;
+        this.senha = senha;
+        this.tipo = tipo;
+    }
+
+    // Getters e setters
+    public Long getId() {
+        return id;
     }
 
     public String getLogin() {
@@ -36,5 +53,9 @@ public class Usuario {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public boolean isAdmin() {
+        return "ADMIN".equalsIgnoreCase(this.tipo);
     }
 }
