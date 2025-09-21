@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/22452374/README.md)
 # Pratica de banda
 Aplicação desktop para alunos e professores visualizarem os repertórios de cada banda.
 
