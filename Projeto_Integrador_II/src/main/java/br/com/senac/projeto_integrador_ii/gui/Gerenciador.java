@@ -2,6 +2,7 @@ package br.com.senac.projeto_integrador_ii.gui;
 
 import br.com.senac.projeto_integrador_ii.persistencia.Musica;
 import br.com.senac.projeto_integrador_ii.persistencia.MusicaDAO;
+import br.com.senac.projeto_integrador_ii.service.MusicaService;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -299,50 +300,54 @@ public class Gerenciador extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGeneroActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        Musica novaMusica = new Musica();
-        try{
-            if(txtId.getText().trim().isEmpty() ||
-               txtTitulo.getText().trim().isEmpty() ||
-               txtBanda.getText().trim().isEmpty() ||
-               txtTom.getText().trim().isEmpty() ||
-               txtGenero.getText().trim().isEmpty() ||
-               txtSemestre.getText().trim().isEmpty() ||
-               txtUrl.getText().trim().isEmpty()) { 
-                JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos!", "Aviso", JOptionPane.WARNING_MESSAGE);
-            return;   
-            }
-            
-            int numero = Integer.parseInt(txtId.getText().trim());
-            novaMusica.setTitulo(txtTitulo.getText());
-            novaMusica.setBanda(txtBanda.getText());
-            novaMusica.setTom(txtTom.getText());
-            novaMusica.setGenero(txtGenero.getText());
-            novaMusica.setSemestre_iniciado(txtSemestre.getText());
-            novaMusica.setUrl(txtUrl.getText());
 
-            MusicaDAO musicaDao = new MusicaDAO();
-            musicaDao.cadastrar(novaMusica);
+        Musica musica = new Musica();
+        musica.setTitulo(txtTitulo.getText());
+        musica.setBanda(txtBanda.getText());
+        musica.setTom(txtTom.getText());
+        musica.setGenero(txtGenero.getText());
+        musica.setSemestreIniciado(txtSemestre.getText());
+        musica.setUrl(txtUrl.getText());
+
+        MusicaService service = new MusicaService();
+        try {
+            service.cadastrarMusica(musica);
             JOptionPane.showMessageDialog(this, "Música cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Ocorreu uma falha:\n" + e.getMessage());
+            limparCampos();
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void limparCampos() {
+        txtId.setText("");
+        txtTitulo.setText("");
+        txtBanda.setText("");
+        txtTom.setText("");
+        txtGenero.setText("");
+        txtSemestre.setText("");
+        txtUrl.setText("");
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         MusicaDAO musicaDao = new MusicaDAO();
-        try{
-            musicaDao.excluir(Integer.parseInt(txtId.getText()));
-            JOptionPane.showMessageDialog(null,"Música excluída com sucesso!");
+        try {
+            musicaDao.excluir(Long.parseLong(txtId.getText()));
+            JOptionPane.showMessageDialog(null, "Música excluída com sucesso!");
+
+            // Limpa todos os campos da tela
             txtId.setText("");
             txtTitulo.setText("");
             txtBanda.setText("");
             txtTom.setText("");
             txtGenero.setText("");
             txtSemestre.setText("");
-            txtUrl.setText(""); 
+            txtUrl.setText("");
         } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Por favor, insira um ID válido.");
-    }
+            JOptionPane.showMessageDialog(null, "Por favor, insira um ID válido.");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
