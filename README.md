@@ -1,4 +1,4 @@
-# Pratica de banda
+# Prática de banda
 Aplicação desktop para alunos e professores visualizarem os repertórios de cada banda.
 
 ## Status do projeto
