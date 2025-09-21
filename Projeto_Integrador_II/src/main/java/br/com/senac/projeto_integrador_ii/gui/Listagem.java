@@ -1,7 +1,7 @@
 package br.com.senac.projeto_integrador_ii.gui;
 
 import br.com.senac.projeto_integrador_ii.persistencia.Musica;
-import br.com.senac.projeto_integrador_ii.persistencia.MusicaDAO;
+import br.com.senac.projeto_integrador_ii.service.MusicaService;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -35,18 +35,12 @@ public class Listagem extends javax.swing.JFrame {
     
     public void carregarMusicas(String pratica, String filtro, String pesquisa) {
         
-    MusicaDAO musicaDAO = new MusicaDAO();
-    List<Musica> musicas;
-    
-    if (pesquisa != null && !pesquisa.isEmpty()) {
-        musicas = musicaDAO.buscarPorGeneroETitulo(filtro, pesquisa);
-    } else {
-        musicas = musicaDAO.buscarPorGenero(filtro);
-    }
-    
+    MusicaService service = new MusicaService();
+    List<Musica> musicas = service.buscarMusicas(filtro, pesquisa);
+
     DefaultTableModel model = (DefaultTableModel) tblMusica.getModel();
-    model.setRowCount(0); 
-    model.setColumnCount(0); 
+    model.setRowCount(0);
+    model.setColumnCount(0);
     model.addColumn("ID");
     model.addColumn("Título");
     model.addColumn("Banda");
@@ -54,19 +48,17 @@ public class Listagem extends javax.swing.JFrame {
     model.addColumn("Gênero");
     model.addColumn("Semestre Iniciado");
     model.addColumn("URL");
-    
 
     for (Musica m : musicas) {
-        model.addRow(new Object[]
-        {
-            m.getId(), 
-            m.getTitulo(), 
-            m.getBanda(), 
-            m.getTom(), 
-            m.getGenero(), 
-            m.getSemestre_iniciado(), 
-            m.getUrl()}
-        );
+        model.addRow(new Object[] {
+            m.getId(),
+            m.getTitulo(),
+            m.getBanda(),
+            m.getTom(),
+            m.getGenero(),
+            m.getSemestreIniciado(),
+            m.getUrl()
+        });
     }
 
     lblPratica.setText(pratica);
