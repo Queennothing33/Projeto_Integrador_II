@@ -1,8 +1,6 @@
 package br.com.senac.projeto_integrador_ii.gui;
 
-import br.com.senac.projeto_integrador_ii.persistencia.MusicaDAO;
 import br.com.senac.projeto_integrador_ii.persistencia.Usuario;
-import br.com.senac.projeto_integrador_ii.persistencia.UsuarioDB;
 import br.com.senac.projeto_integrador_ii.service.AuthService;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -18,7 +16,7 @@ public class Login extends javax.swing.JFrame {
             btnLogin.setMnemonic(KeyEvent.VK_D);
             btnEsqueceu.setMnemonic(KeyEvent.VK_F);            
         }
-
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,10 +33,10 @@ public class Login extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblSenha = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JTextField();
         btnEsqueceu = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         lblNaoe = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JPasswordField();
         Roxo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,11 +62,6 @@ public class Login extends javax.swing.JFrame {
 
         lblSenha.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblSenha.setText("Senha");
-
-        txtSenha.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtSenha.setToolTipText("Digite aqui a senha");
-        txtSenha.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        txtSenha.setNextFocusableComponent(btnEsqueceu);
 
         btnEsqueceu.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnEsqueceu.setForeground(new java.awt.Color(100, 0, 139));
@@ -100,16 +93,25 @@ public class Login extends javax.swing.JFrame {
         lblNaoe.setText("Não é cadastrado? Mande mensagem para a secretaria");
         lblNaoe.setToolTipText("Não é cadastrado? Mande mensagem para a secretaria");
 
+        txtSenha.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtSenha.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
         javax.swing.GroupLayout BrancoLayout = new javax.swing.GroupLayout(Branco);
         Branco.setLayout(BrancoLayout);
         BrancoLayout.setHorizontalGroup(
             BrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BrancoLayout.createSequentialGroup()
+                .addGap(0, 115, Short.MAX_VALUE)
+                .addComponent(lblNaoe)
+                .addGap(112, 112, 112))
             .addGroup(BrancoLayout.createSequentialGroup()
                 .addGroup(BrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BrancoLayout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(BrancoLayout.createSequentialGroup()
                         .addGap(127, 127, 127)
                         .addGroup(BrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSenha)
                             .addComponent(lblSenha)
                             .addComponent(txtEmail)
                             .addComponent(lblEmail)
@@ -117,15 +119,9 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(lblBemVindo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(BrancoLayout.createSequentialGroup()
                                 .addGap(140, 140, 140)
-                                .addComponent(btnEsqueceu))))
-                    .addGroup(BrancoLayout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnEsqueceu))
+                            .addComponent(txtSenha))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BrancoLayout.createSequentialGroup()
-                .addGap(0, 115, Short.MAX_VALUE)
-                .addComponent(lblNaoe)
-                .addGap(112, 112, 112))
         );
         BrancoLayout.setVerticalGroup(
             BrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,21 +137,19 @@ public class Login extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(lblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
                 .addComponent(btnEsqueceu)
                 .addGap(37, 37, 37)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(lblNaoe)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         lblBemVindo.getAccessibleContext().setAccessibleDescription("Texto centralizado no topo da tela com a mensagem \"Bem-vindo (a) novamente!\"");
         lblPorFavor.getAccessibleContext().setAccessibleDescription("Texto centralizado no topo da tela com a mensagem \"Por favor insira os seus dados para realizar o login\"");
         txtEmail.getAccessibleContext().setAccessibleDescription("Campo de texto para o email");
-        txtSenha.getAccessibleContext().setAccessibleName("");
-        txtSenha.getAccessibleContext().setAccessibleDescription("Campo de texto para a senha");
         btnEsqueceu.getAccessibleContext().setAccessibleDescription("Botao para realizar a troca de senha");
         btnLogin.getAccessibleContext().setAccessibleDescription("Botão para realizar o login");
         lblNaoe.getAccessibleContext().setAccessibleDescription("Texto centralizado no fim da tela com a mensagem \"Não é cadastrado? Mande mensagem para a secretaria\"");
@@ -285,6 +279,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblPorFavor;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

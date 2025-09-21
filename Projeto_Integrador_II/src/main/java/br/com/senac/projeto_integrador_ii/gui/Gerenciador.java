@@ -306,7 +306,7 @@ public class Gerenciador extends javax.swing.JFrame {
         musica.setBanda(txtBanda.getText());
         musica.setTom(txtTom.getText());
         musica.setGenero(txtGenero.getText());
-        musica.setSemestreIniciado(txtSemestre.getText());
+        musica.setSemestre_iniciado(txtSemestre.getText());
         musica.setUrl(txtUrl.getText());
 
         MusicaService service = new MusicaService();

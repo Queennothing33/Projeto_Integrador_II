@@ -56,7 +56,7 @@ public class Listagem extends javax.swing.JFrame {
             m.getBanda(),
             m.getTom(),
             m.getGenero(),
-            m.getSemestreIniciado(),
+            m.getSemestre_iniciado(),
             m.getUrl()
         });
     }

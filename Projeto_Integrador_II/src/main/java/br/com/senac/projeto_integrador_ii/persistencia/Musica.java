@@ -16,19 +16,19 @@ public class Musica {
     private String banda;
     private String tom;
     private String genero;
-    private String semestreIniciado;
+    private String semestre_iniciado;
     private String url;
 
     // Construtor vazio exigido pelo JPA
     public Musica() {
     }
 
-    public Musica(String titulo, String banda, String tom, String genero, String semestreIniciado, String url) {
+    public Musica(String titulo, String banda, String tom, String genero, String semestre_iniciado, String url) {
         this.titulo = titulo;
         this.banda = banda;
         this.tom = tom;
         this.genero = genero;
-        this.semestreIniciado = semestreIniciado;
+        this.semestre_iniciado = semestre_iniciado;
         this.url = url;
     }
 
@@ -40,12 +40,12 @@ public class Musica {
         this.id = id;
     }
 
-    public String getSemestreIniciado() {
-        return semestreIniciado;
+    public String getSemestre_iniciado() {
+        return semestre_iniciado;
     }
 
-    public void setSemestreIniciado(String semestreIniciado) {
-        this.semestreIniciado = semestreIniciado;
+    public void setSemestre_iniciado(String semestre_iniciado) {
+        this.semestre_iniciado = semestre_iniciado;
     }
 
     public String getTitulo() {

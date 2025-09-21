@@ -22,7 +22,7 @@ public class MusicaService {
                 || m.getBanda() == null || m.getBanda().isBlank()
                 || m.getTom() == null || m.getTom().isBlank()
                 || m.getGenero() == null || m.getGenero().isBlank()
-                || m.getSemestreIniciado() == null || m.getSemestreIniciado().isBlank()
+                || m.getSemestre_iniciado() == null || m.getSemestre_iniciado().isBlank()
                 || m.getUrl() == null || m.getUrl().isBlank()) {
             throw new IllegalArgumentException("Todos os campos devem ser preenchidos");
         }
