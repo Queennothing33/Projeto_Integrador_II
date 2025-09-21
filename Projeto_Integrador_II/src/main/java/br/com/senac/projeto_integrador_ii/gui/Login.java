@@ -3,6 +3,7 @@ package br.com.senac.projeto_integrador_ii.gui;
 import br.com.senac.projeto_integrador_ii.persistencia.MusicaDAO;
 import br.com.senac.projeto_integrador_ii.persistencia.Usuario;
 import br.com.senac.projeto_integrador_ii.persistencia.UsuarioDB;
+import br.com.senac.projeto_integrador_ii.service.AuthService;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -211,47 +212,32 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEsqueceuActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        Seleção seleção = new Seleção();
-        
-        MusicaDAO musicaDao = new MusicaDAO();
-                              
-        Usuario usuario = new Usuario();
+        AuthService authService = new AuthService();
+        Usuario usuario = authService.autenticar(txtEmail.getText(), txtSenha.getText());
 
-                              
-        usuario.setLogin(txtEmail.getText());
-        usuario.setSenha(txtSenha.getText());        
-                              
-        usuario = UsuarioDB.validarUsuarioSeguro(usuario);
-                                
-        if (usuario != null) {
-        if( usuario.getTipo().equalsIgnoreCase("professor") ) {
-            JOptionPane.showMessageDialog(null, "Bem-vindo, " + usuario.getTipo() + "!");
-            seleção.btnGerenciar.setEnabled(true);
-            seleção.btnSair.setEnabled(true);
-            seleção.btnRock.setEnabled(true);
-            seleção.btnBlackMusic.setEnabled(true);
-            seleção.btnSertanejo.setEnabled(true);
-            seleção.btnPop.setEnabled(true);
-            seleção.setUsuario(usuario);
-            seleção.setVisible(true);
-        } else if (usuario.getTipo().equalsIgnoreCase("aluno")) {
-            JOptionPane.showMessageDialog(null, "Bem-vindo, " + usuario.getTipo() + "!");
-            seleção.btnGerenciar.setEnabled(false);
-            seleção.btnSair.setEnabled(true);
-            seleção.btnRock.setEnabled(true);
-            seleção.btnBlackMusic.setEnabled(true);
-            seleção.btnSertanejo.setEnabled(true);
-            seleção.btnPop.setEnabled(true);
-            seleção.setUsuario(usuario);
-            seleção.setVisible(true);
+        if (usuario == null) {
+            JOptionPane.showMessageDialog(this, "Erro de autenticação! Verifique seus dados.");
+            return;
         }
-          else {
-            JOptionPane.showMessageDialog(null, "Ops, " + usuario.getTipo() + "\nParece que você não tem permissão acessar o sistema :( ");
-        }} else {
-            JOptionPane.showMessageDialog(null, "Erro de autenticação! Verifique se os dados estão corretos.");
-            } 
+
+        Seleção seleção = new Seleção();
+        configurarPermissoes(usuario, seleção);
+
+        JOptionPane.showMessageDialog(this, "Bem-vindo, " + usuario.getTipo() + "!");
+        seleção.setUsuario(usuario);
+        seleção.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void configurarPermissoes(Usuario usuario, Seleção seleção) {
+        boolean isProfessor = usuario.getTipo().equalsIgnoreCase("professor");
+        seleção.btnGerenciar.setEnabled(isProfessor);
+        seleção.btnSair.setEnabled(true);
+        seleção.btnRock.setEnabled(true);
+        seleção.btnBlackMusic.setEnabled(true);
+        seleção.btnSertanejo.setEnabled(true);
+        seleção.btnPop.setEnabled(true);
+    }
     /**
      * @param args the command line arguments
      */
