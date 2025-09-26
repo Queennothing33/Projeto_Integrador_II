@@ -23,7 +23,8 @@ public class Musica {
     public Musica() {
     }
 
-    public Musica(String titulo, String banda, String tom, String genero, String semestre_iniciado, String url) {
+    public Musica(Long id, String titulo, String banda, String tom, String genero, String semestreIniciado, String url) {
+        this.id = id;
         this.titulo = titulo;
         this.banda = banda;
         this.tom = tom;
